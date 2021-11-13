@@ -29,7 +29,6 @@ class TrezorKeyring extends EventEmitter {
     this.unlockedAccount = 0;
     this.paths = {};
     this.deserialize(opts);
-    TrezorConnect.manifest(TREZOR_CONNECT_MANIFEST);
   }
 
   serialize() {
@@ -60,9 +59,10 @@ class TrezorKeyring extends EventEmitter {
       return Promise.resolve('already unlocked');
     }
     return new Promise((resolve, reject) => {
+      TrezorConnect.manifest(TREZOR_CONNECT_MANIFEST);
       TrezorConnect.getPublicKey({
         path: this.hdPath,
-        coin: 'ETH',
+        coin: 'eth',
       })
         .then((response) => {
           if (response.success) {
