@@ -61,8 +61,7 @@ class TrezorKeyring extends EventEmitter {
     return new Promise((resolve, reject) => {
       TrezorConnect.manifest(TREZOR_CONNECT_MANIFEST);
       TrezorConnect.getPublicKey({
-        path: this.hdPath,
-        coin: 'eth',
+        path: this.hdPath
       })
         .then((response) => {
           if (response.success) {
